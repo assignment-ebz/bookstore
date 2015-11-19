@@ -8,6 +8,9 @@
 		<link href='css/style.css' rel="stylesheet" type="text/css"/>
 		<script src='js/jquery-1.11.1.js' type="text/javascript"</script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="css/slider.css" type="text/css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<script src="js/jquery.flexslider-min.js"></script>
 		<script>
 			$(document).ready(function(){
 				$('a.number').click(function(){
@@ -53,12 +56,20 @@
 			<div id='main-header'>
 				<div class="wrapper">
 					<h1><a href='index.php'></a>Book Online Store</h1>
-					<form id="search" action="" method="">			
-						<input type="text" />
+					<form id="search" action="index.php" method="GET">			
+						<input type="text" name="keyword" />
 						<input type="submit" value="Search" />
 					</form>
 					<div id='cart'>
-						<h4>Your Cart</h4><p><a href='detail.php'>1 items</a></p>
+						<h4>Your Cart</h4><p><a href='detail.php'><?php if(isset($_SESSION['giohang'])){
+																										if($_SESSION['giohang']){
+																											echo count($_SESSION['giohang']);
+																										} 
+																									}else{
+																											echo "0";
+																											}?> items</a>
+																							</p>
+																							
 					</div><!-- end #cart -->
 				</div><!-- END .wrapper -->
 			</div><!-- END #main-header -->
@@ -73,3 +84,28 @@
 				</div><!-- END .wrapper -->
 			</div><!-- END #main-nav -->
 		</div><!-- END #header -->
+		
+		<div class="flex-container">
+			<div class="flexslider">
+				<ul class="slides">
+					<li>
+						<a href="#"><img src="images/slide1.jpg" /></a>
+					</li>		
+					<li>
+						<img src="images/slide2.jpg" />
+					</li>		
+					<li>
+						<img src="images/slide3.jpg" />
+					</li>
+				</ul>
+			</div>
+		</div>
+
+<script>
+$(document).ready(function () {
+	$('.flexslider').flexslider({
+		animation: 'fade',
+		controlsContainer: '.flexslider'
+	});
+});
+</script>

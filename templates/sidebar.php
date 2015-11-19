@@ -1,13 +1,34 @@
+<?php
+	include('core/connect.php');
+	
+	
+?>	
+
 				<div id='sidebar'>
 					<div id="cat">
 						<h3 class='title'>Categories</h3>
 						<ul>
-							<li><a href=''>Romance</a></li>
-							<li><a href=''>Horror </a></li>
-							<li><a href=''>Fiction</a></li>
-							<li><a href=''>Politic</a></li>
-							<li><a href=''>Education</a></li>
-							<li><a href=''>Comic</a></li>
+							<?php
+								$sql = "SELECT * FROM category";
+								$result = mysqli_query($con, $sql);
+								// TONG SO LUONG SACH CUA TUNG CATEGORY ?!
+								
+								while($row=mysqli_fetch_array($result)){
+								$id = $row['cateID'];
+								
+							?>
+								<li><a href='index.php?category=<?php echo $id; ?>'><?php echo ucfirst(strtolower($row['cateName'])); ?> (<?php 				
+																																							$total = 0;
+																																							$sql1 = "SELECT count(*) FROM books WHERE bookCateID = ".$id;
+																																							$result1 = mysqli_query($con, $sql1);
+																																									if($result1){
+																																										$count = mysqli_fetch_array($result1);
+																																										$total = $count[0]; 
+																																										
+																																									} echo $total;?>)</a><p></p></li>
+							<?php
+								}
+							?>
 						</ul>
 					</div><!-- END #cat-->
 					<div id="byPrice">
